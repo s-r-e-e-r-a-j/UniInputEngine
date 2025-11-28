@@ -72,3 +72,118 @@ chmod +x install.sh
 ```bash
 sudo ./install.sh
 ```
+
+## Usage
+
+After installation, you can verify that the virtual input devices are loaded correctly by checking `/proc/bus/input/devices`:
+
+```bash
+cat /proc/bus/input/devices
+```
+
+You should see output similar to the following:
+
+- **Virtual Keyboard**
+```text
+I: Bus=0006 Vendor=0000 Product=0000 Version=0000
+N: Name="uniinputengine-virtual-keyboard"
+P: Phys=uniinputengine/input0
+S: Sysfs=/devices/virtual/input/input12
+U: Uniq=
+H: Handlers=sysrq rfkill kbd event6 
+B: PROP=0
+B: EV=3
+B: KEY=7fffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff fffffffffffffffe
+```
+
+- **Virtual Mouse**
+
+```text
+I: Bus=0006 Vendor=0000 Product=0000 Version=0000
+N: Name="uniinputengine-virtual-mouse"
+P: Phys=uniinputengine/input1
+S: Sysfs=/devices/virtual/input/input13
+U: Uniq=
+H: Handlers=mouse2 event7 
+B: PROP=0
+B: EV=7
+B: KEY=7f0000 0 0 0 0
+B: REL=143
+```
+
+- **Virtual Gamepad**
+
+```text
+I: Bus=0006 Vendor=0000 Product=0000 Version=0000
+N: Name="uniinputengine-virtual-gamepad"
+P: Phys=uniinputengine/input2
+S: Sysfs=/devices/virtual/input/input14
+U: Uniq=
+H: Handlers=event8 js1 
+B: PROP=0
+B: EV=b
+B: KEY=7fdb000100000000 0 0 0 0
+B: ABS=3003f
+```
+
+- **Virtual Button Device**
+
+```text
+I: Bus=0006 Vendor=0000 Product=0000 Version=0000
+N: Name="uniinputengine-virtual-button"
+P: Phys=uniinputengine/input3
+S: Sysfs=/devices/virtual/input/input15
+U: Uniq=
+H: Handlers=event9 
+B: PROP=0
+B: EV=3
+B: KEY=3ff 0 0 0 0
+```
+
+> **Device Event Numbers:**  
+> Each virtual device created by UniInputEngine has a specific event number shown in the `Handlers` line of `/proc/bus/input/devices`.  
+> This event number corresponds to the `/dev/input/eventX` file used to send input to that device.  
+> 
+> **Important:** Event numbers can change after a reboot. Always check the current numbers using:
+> 
+> ```bash
+> cat /proc/bus/input/devices
+> ```
+> 
+> **Example output (event numbers may differ on your system):**
+> - `uniinputengine-virtual-keyboard` → Handlers: `event6` → Use `/dev/input/event6`  
+> - `uniinputengine-virtual-mouse` → Handlers: `event7` → Use `/dev/input/event7`  
+> - `uniinputengine-virtual-gamepad` → Handlers: `event8` → Use `/dev/input/event8`  
+> - `uniinputengine-virtual-button` → Handlers: `event9` → Use `/dev/input/event9`
+
+After checking the event number via `/proc/bus/input/devices`, you can use `evtest` to see all supported keys, buttons, and their corresponding keycodes/values for each virtual device.
+
+> **Note:** `evtest` is **not required** for the UniInputEngine driver to work. It is only for checking supported keys/buttons and testing. If it’s not installed, you can install it using your package manager:  
+> 
+> ```bash
+> # Debian/Ubuntu
+> sudo apt install evtest
+>
+> # Fedora/RHEL
+> sudo dnf install evtest
+>
+> # Arch Linux
+> sudo pacman -S evtest
+> ```
+For example:
+
+```bash
+# virtual keyboard
+sudo evtest /dev/input/event6
+
+# virtual mouse 
+sudo evtest /dev/input/event7
+
+# virtual gamepad
+sudo evtest /dev/input/event8
+
+# virtual button device  
+sudo evtest /dev/input/event9   
+```
+
+This will show the full list of supported events (keys, buttons, relative movements, axes, etc.) for that device, and you can verify everything is working correctly.
