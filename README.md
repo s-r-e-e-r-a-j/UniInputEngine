@@ -189,3 +189,21 @@ sudo evtest /dev/input/event9
 ```
 
 This will show the full list of supported input events (keys, buttons, relative movements, axes, etc.) and their corresponding keycodes, so you can verify everything is working correctly.
+
+## Uninstallation
+**Run each command separately to avoid errors:**
+```bash
+sudo rmmod uniinputengine
+```
+```bash
+sudo rm /etc/modules-load.d/uniinputengine.conf
+```
+```bash
+sudo rm /lib/modules/$(uname -r)/extra/uniinputengine.ko
+```
+```bash
+sudo depmod -a
+```
+
+## License
+This project is licensed under the GNU General Public License v3.0
