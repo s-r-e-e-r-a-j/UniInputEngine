@@ -26,7 +26,7 @@ It uses the **Linux input subsystem** to generate input events directly from the
   - Registers all Linux `KEY_` codes
 
 - **Virtual Keyboard Support**
-  - Supports all keys available in the Linux kernel (`KEY_0` … `KEY_MAX`)
+  - Supports all keys available in the Linux kernel (from `KEY_0` to `KEY_MAX`)
   - Supports key repeat events (`REP_DELAY`, `REP_PERIOD`)
 
 - **Virtual Mouse Support**
@@ -40,6 +40,6 @@ It uses the **Linux input subsystem** to generate input events directly from the
   - Hat switch: `ABS_HAT0X`, `ABS_HAT0Y`
 
 - **Virtual Button Device Support**
-  - Buttons: `BTN_0` … `BTN_9`
+  - Buttons: from `BTN_0` to `BTN_9`
 
 - Works on most Linux distributions with proper kernel headers.
