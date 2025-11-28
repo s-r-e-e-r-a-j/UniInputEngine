@@ -158,7 +158,7 @@ B: KEY=3ff 0 0 0 0
 
 After checking the event number via `/proc/bus/input/devices`, you can use `evtest` to see all supported keys, buttons, and their corresponding keycodes/values for each virtual device.
 
-> **Note:** `evtest` is **not required** for the UniInputEngine driver to work. It is only for checking supported keys/buttons and testing. If it’s not installed, you can install it using your package manager:  
+> **Note:** `evtest` is not required for the UniInputEngine driver to function. It is only used to check supported keys/buttons and for testing purposes. If it’s not installed, you can install it using your package manager:  
 > 
 > ```bash
 > # Debian/Ubuntu
