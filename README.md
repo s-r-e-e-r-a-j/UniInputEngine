@@ -188,4 +188,4 @@ sudo evtest /dev/input/event8
 sudo evtest /dev/input/event9   
 ```
 
-This will show the full list of supported events (keys, buttons, relative movements, axes, etc.) for that device, and you can verify everything is working correctly.
+This will show the full list of supported input events (keys, buttons, relative movements, axes, etc.) and their corresponding keycodes, so you can verify everything is working correctly.
