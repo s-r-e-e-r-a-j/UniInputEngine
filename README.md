@@ -48,16 +48,25 @@ It uses the **Linux input subsystem** to generate input events directly from the
 
 ## Requirements
 
-- **Linux kernel 6.14 or newer**  
+- **Linux kernel 6.14 or newer**
   - Tested on **6.14, 6.15, 6.16, 6.17, and 6.18** on Ubuntu 24.04.3 LTS
-- **GCC 13 or newer**, or the GCC version used to build your running kernel  
-  - **For mainline kernels 6.17 and 6.18, GCC 15 is required**  
+
+- **GCC 13 or newer**, or the GCC version used to build your running kernel
+  - **For mainline kernels 6.15 and 6.16, GCC 14 is required**
+  - **GCC 14 must be accessible as `/usr/bin/gcc-14`** (symlinked if installed elsewhere)  
+    - Simply naming it `gcc` is not enough
+  - **For mainline kernels 6.17 and 6.18, GCC 15 is required**
   - **GCC 15 must be accessible as `/usr/bin/gcc-15`** (symlinked if installed elsewhere)  
     - Simply naming it `gcc` is not enough
+
 - **Make**
 - **Linux kernel headers** for the running kernel (usually preinstalled on Ubuntu)
 
-**Note:** The `/usr/bin/gcc-15` symlink is mandatory for module compilation on mainline kernels (6.17 and 6.18). Without it, you may get compilation errors.
+**Note for mainline kernels 6.15 and 6.16:**  
+`/usr/bin/gcc-14` symlink is mandatory. Without it, you may get compilation errors.
+
+**Note for mainline kernels 6.17 and 6.18:**  
+`/usr/bin/gcc-15` symlink is mandatory. Without it, you may get compilation errors.
   
 ## Installation
 
